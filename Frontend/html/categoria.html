@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías - CastleGaming</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para la página de categorías */
+        .categories {
+            background-color: var(--darker-bg);
+            padding: 60px 0;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .category-name {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo"><i class="fas fa-crown"></i> CastleGaming</a>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            </ul>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="user-actions" id="userActions">
+                <!-- Esto se actualizará dinámicamente según el estado de autenticación -->
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Crear Cuenta</span>
+                </a>
+                <a href="carrito.html" class="user-action">
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Categorías -->
+    <section class="categories">
+        <div class="container">
+            <h2>Categorías de Productos</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="window.location.href='productos.html'">
+                    <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Teclados">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Teclados</h3>
+                    </div>
+                </div>
+                <div class="category-card" onclick="window.location.href='productos.html'">
+                    <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Ratones">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Ratones</h3>
+                    </div>
+                </div>
+                <div class="category-card" onclick="window.location.href='productos.html'">
+                    <img src="https://images.unsplash.com/photo-1599669454699-248893623464?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Auriculares">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Auriculares</h3>
+                    </div>
+                </div>
+                <div class="category-card" onclick="window.location.href='productos.html'">
+                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Accesorios">
+                    <div class="category-overlay">
+                        <h3 class="category-name">Accesorios</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CastleGaming</h3>
+                    <p>Fabricantes de periféricos gaming de edición limitada para los jugadores más exigentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Productos</h3>
+                    <ul>
+                        <li><a href="productos.html">Teclados</a></li>
+                        <li><a href="productos.html">Ratones</a></li>
+                        <li><a href="productos.html">Auriculares</a></li>
+                        <li><a href="productos.html">Alfombrillas</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Suscríbete para recibir información sobre lanzamientos exclusivos y ofertas especiales.</p>
+                    <form>
+                        <input type="email" placeholder="Tu email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 CastleGaming. Todos los derechos reservados. Ediciones Limitadas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

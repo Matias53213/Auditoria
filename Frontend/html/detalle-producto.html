@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teclado Dragon Fire - CastleGaming</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para la página de detalle */
+        .product-detail-section {
+            padding: 60px 0;
+        }
+        
+        .product-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .product-gallery {
+            position: relative;
+        }
+
+        .product-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-thumbnail:hover, .product-thumbnail.active {
+            opacity: 1;
+        }
+
+        .product-info-detail {
+            padding: 20px 0;
+        }
+
+        .product-title-detail {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        .product-price-detail {
+            font-size: 1.8rem;
+            color: var(--primary-orange);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .product-description-detail {
+            color: var(--gray-text);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .product-specs {
+            margin-bottom: 30px;
+        }
+
+        .spec-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .spec-label {
+            width: 120px;
+            color: var(--gray-text);
+        }
+
+        .spec-value {
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            padding: 0 10px;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 992px) {
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo"><i class="fas fa-crown"></i> CastleGaming</a>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            </ul>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="user-actions" id="userActions">
+                <!-- Esto se actualizará dinámicamente según el estado de autenticación -->
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Crear Cuenta</span>
+                </a>
+                <a href="carrito.html" class="user-action">
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Detalle de Producto -->
+    <section class="product-detail-section">
+        <div class="container">
+            <div class="product-detail">
+                <div class="product-gallery">
+                    <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Teclado Mecánico Dragon Fire" class="product-main-image">
+                    <div class="product-thumbnails">
+                        <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Vista 1" class="product-thumbnail active">
+                        <img src="https://images.unsplash.com/photo-1583445013765-46a20bfc524f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Vista 2" class="product-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Vista 3" class="product-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1605134550917-5d39d656bac4?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Vista 4" class="product-thumbnail">
+                    </div>
+                </div>
+                <div class="product-info-detail">
+                    <h1 class="product-title-detail">Teclado Mecánico "Dragon Fire"</h1>
+                    <p class="product-price-detail">€199,99</p>
+                    <p class="product-description-detail">
+                        El teclado mecánico "Dragon Fire" es una edición limitada diseñada para los verdaderos entusiastas del gaming. 
+                        Con switches Cherry MX Red que ofrecen una experiencia táctil suave y responsive, este teclado está construido 
+                        para durar millones de pulsaciones. La retroiluminación RGB personalizable permite crear ambientes únicos para 
+                        cada partida, mientras que su construcción de aluminio aporta robustez y estilo.
+                    </p>
+                    <div class="product-specs">
+                        <h3>Especificaciones</h3>
+                        <div class="spec-item">
+                            <span class="spec-label">Switches:</span>
+                            <span class="spec-value">Cherry MX Red</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Iluminación:</span>
+                            <span class="spec-value">RGB 16.8 millones de colores</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Material:</span>
+                            <span class="spec-value">Aluminio anodizado</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Conexión:</span>
+                            <span class="spec-value">USB-C con cable desconectable</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Teclas:</span>
+                            <span class="spec-value">104 teclas anti-ghosting</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn" id="addToCartBtn">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CastleGaming</h3>
+                    <p>Fabricantes de periféricos gaming de edición limitada para los jugadores más exigentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Productos</h3>
+                    <ul>
+                        <li><a href="productos.html">Teclados</a></li>
+                        <li><a href="productos.html">Ratones</a></li>
+                        <li><a href="productos.html">Auriculares</a></li>
+                        <li><a href="productos.html">Alfombrillas</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Suscríbete para recibir información sobre lanzamientos exclusivos y ofertas especiales.</p>
+                    <form>
+                        <input type="email" placeholder="Tu email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 CastleGaming. Todos los derechos reservados. Ediciones Limitadas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad de las miniaturas
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.product-thumbnail');
+            const mainImage = document.querySelector('.product-main-image');
+            
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    // Remover clase active de todas las miniaturas
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    // Añadir clase active a la miniatura clickeada
+                    this.classList.add('active');
+                    // Cambiar la imagen principal
+                    mainImage.src = this.src.replace('200', '1000');
+                });
+            });
+
+            // Funcionalidad del selector de cantidad
+            const quantityButtons = document.querySelectorAll('.quantity-btn');
+            
+            quantityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('.quantity-input');
+                    let value = parseInt(input.value);
+                    
+                    if (this.textContent === '+') {
+                        input.value = value + 1;
+                    } else if (this.textContent === '-' && value > 1) {
+                        input.value = value - 1;
+                    }
+                });
+            });
+
+            // Funcionalidad de añadir al carrito
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            addToCartBtn.addEventListener('click', function() {
+                const quantity = parseInt(document.querySelector('.quantity-input').value);
+                alert(`Se han añadido ${quantity} teclado(s) al carrito`);
+                // Redirigir al carrito
+                window.location.href = 'carrito.html';
+            });
+        });
+    // Función para actualizar la navbar según el estado de autenticación
+    function updateNavbar() {
+        const userActions = document.getElementById('userActions');
+        const token = localStorage.getItem('token');
+        const userData = localStorage.getItem('user');
+        
+        if (token && userData) {
+            try {
+                const user = JSON.parse(userData);
+                // Crear elemento de perfil de usuario
+                userActions.innerHTML = `
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            ${user.username.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">${user.username}</span>
+                            <span class="user-welcome">Bienvenido</span>
+                        </div>
+                    </div>
+                    <a href="carrito.html" class="user-action">
+                        <div class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">3</span>
+                        </div>
+                        <span>Carrito</span>
+                    </a>
+                    <a href="#" class="user-action" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar Sesión</span>
+                    </a>
+                `;
+                
+                // Agregar evento de logout
+                document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.reload();
+                });
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+            }
+        }
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+        updateNavbar();
+    });
+    </script>
+</body>
+</html>

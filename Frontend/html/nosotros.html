@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - CastleGaming</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para la página sobre nosotros */
+        .about-section {
+            padding: 60px 0;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--gray-text);
+        }
+
+        .about-content h3 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        .about-content ul {
+            color: var(--gray-text);
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .about-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 8px;
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .team-member h4 {
+            color: var(--light-text);
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .team-member .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .team-member .social-links a {
+            color: var(--gray-text);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .team-member .social-links a:hover {
+            color: var(--primary-orange);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo"><i class="fas fa-crown"></i> CastleGaming</a>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            </ul>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="user-actions" id="userActions">
+                <!-- Esto se actualizará dinámicamente según el estado de autenticación -->
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Crear Cuenta</span>
+                </a>
+                <a href="carrito.html" class="user-action">
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Sobre Nosotros -->
+    <section class="about-section">
+        <div class="container">
+            <h2>Sobre Nosotros</h2>
+            <div class="about-content">
+                <p>
+                    CastleGaming nació en 2018 con la visión de crear periféricos gaming de edición limitada para los jugadores más exigentes. 
+                    Nuestra misión es combinar el alto rendimiento con diseños exclusivos que reflejen la pasión por los videojuegos.
+                </p>
+                <p>
+                    Cada producto que creamos es el resultado de meses de investigación, diseño y testing. Trabajamos con artistas especializados 
+                    para garantizar que cada edición limitada sea una verdadera obra de arte, mientras mantenemos los más altos estándares de 
+                    calidad y rendimiento.
+                </p>
+                <p>
+                    En CastleGaming no solo vendemos periféricos, creamos una comunidad. Los propietarios de nuestros productos tienen acceso 
+                    a eventos exclusivos, contenido especial y la posibilidad de influir en futuras ediciones limitadas.
+                </p>
+                
+                <h3>Nuestros Valores</h3>
+                <ul>
+                    <li>Calidad premium en cada producto</li>
+                    <li>Diseños exclusivos y limitados</li>
+                    <li>Innovación constante en tecnología gaming</li>
+                    <li>Comunidad y conexión con nuestros clientes</li>
+                    <li>Sostenibilidad y responsabilidad ambiental</li>
+                </ul>
+                
+                <h3>Nuestro Equipo</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="CEO">
+                        <h4>Alex Rodríguez</h4>
+                        <p>CEO & Fundador</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Diseñadora">
+                        <h4>Laura Martínez</h4>
+                        <p>Directora de Diseño</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Ingeniero">
+                        <h4>Carlos Fernández</h4>
+                        <p>Ingeniero en Jefe</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CastleGaming</h3>
+                    <p>Fabricantes de periféricos gaming de edición limitada para los jugadores más exigentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Productos</h3>
+                    <ul>
+                        <li><a href="productos.html">Teclados</a></li>
+                        <li><a href="productos.html">Ratones</a></li>
+                        <li><a href="productos.html">Auriculares</a></li>
+                        <li><a href="productos.html">Alfombrillas</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Suscríbete para recibir información sobre lanzamientos exclusivos y ofertas especiales.</p>
+                    <form>
+                        <input type="email" placeholder="Tu email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 CastleGaming. Todos los derechos reservados. Ediciones Limitadas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

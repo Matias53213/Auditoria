@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - CastleGaming</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo"><i class="fas fa-crown"></i> CastleGaming</a>
+        <div class="nav-content">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="categorias.html">Categorías</a></li>
+                <li><a href="nosotros.html">Sobre Nosotros</a></li>
+            </ul>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="user-actions" id="userActions">
+                <!-- Esto se actualizará dinámicamente según el estado de autenticación -->
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user"></i>
+                    <span>Iniciar Sesión</span>
+                </a>
+                <a href="login.html" class="user-action">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Crear Cuenta</span>
+                </a>
+                <a href="carrito.html" class="user-action">
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                    <span>Carrito</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Productos -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="products-header">
+                <h2>Todos los Productos</h2>
+                <div class="filter-section">
+                    <select class="filter-select">
+                        <option>Todos los productos</option>
+                        <option>Teclados</option>
+                        <option>Ratones</option>
+                        <option>Auriculares</option>
+                        <option>Alfombrillas</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Ordenar por: Destacados</option>
+                        <option>Ordenar por: Precio (Menor a Mayor)</option>
+                        <option>Ordenar por: Precio (Mayor a Menor)</option>
+                        <option>Ordenar por: Más Nuevos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Teclado Mecánico Edición Limitada">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Teclado Mecánico "Dragon Fire"</h3>
+                        <p class="product-desc">Edición limitada con switches Cherry MX Red.</p>
+                        <p class="product-price">€199,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Ratón Gaming Edición Especial">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ratón "Stealth Phantom"</h3>
+                        <p class="product-desc">Sensor de 20.000 DPI, diseño ergonómico.</p>
+                        <p class="product-price">€129,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1599669454699-248893623464?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Auriculares Gaming Limited Edition">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Auriculares "Cyber Sound X"</h3>
+                        <p class="product-desc">Sonido surround 7.1, cancelación de ruido.</p>
+                        <p class="product-price">€159,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Alfombrilla de Ratón Edición Coleccionista">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Alfombrilla "Castle Realm XL"</h3>
+                        <p class="product-desc">Superficie de microtejido, base antideslizante.</p>
+                        <p class="product-price">€49,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Teclado Mecánico Compacto">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Teclado "Mini Forge"</h3>
+                        <p class="product-desc">Formato 60%, switches táctiles y cable desconectable.</p>
+                        <p class="product-price">€149,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Ratón Inalámbrico">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ratón "Wireless Shadow"</h3>
+                        <p class="product-desc"> Tecnología inalámbrica de 2.4GHz, 50 horas de batería.</p>
+                        <p class="product-price">€89,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 7 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1599669454699-248893623464?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Auriculares Inalámbricos">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Auriculares "Freedom Wave"</h3>
+                        <p class="product-desc">Bluetooth 5.0, 30h de autonomía, cancelación de ruido.</p>
+                        <p class="product-price">€179,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 8 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Soporte para Auriculares">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Soporte "Phantom Stand"</h3>
+                        <p class="product-desc">Base metálica con iluminación RGB y puertos USB.</p>
+                        <p class="product-price">€59,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CastleGaming</h3>
+                    <p>Fabricantes de periféricos gaming de edición limitada para los jugadores más exigentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Productos</h3>
+                    <ul>
+                        <li><a href="productos.html">Teclados</a></li>
+                        <li><a href="productos.html">Ratones</a></li>
+                        <li><a href="productos.html">Auriculares</a></li>
+                        <li><a href="productos.html">Alfombrillas</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Suscríbete para recibir información sobre lanzamientos exclusivos y ofertas especiales.</p>
+                    <form>
+                        <input type="email" placeholder="Tu email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 CastleGaming. Todos los derechos reservados. Ediciones Limitadas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

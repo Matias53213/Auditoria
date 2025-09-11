@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CastleGaming - Periféricos de Edición Limitada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de colores */
+        :root {
+            --primary-orange: #FF7B00;
+            --secondary-orange: #FF9E40;
+            --dark-bg: #121212;
+            --darker-bg: #0A0A0A;
+            --light-text: #F5F5F5;
+            --gray-text: #AAAAAA;
+            --card-bg: #1E1E1E;
+            --hover-bg: #2A2A2A;
+        }
+
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-orange);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-orange);
+            color: var(--light-text);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-orange);
+            transform: translateY(-2px);
+            color: var(--darker-bg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-orange);
+            color: var(--light-text);
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--primary-orange);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-img{
+            width: 80px;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--darker-bg);
+            border-radius: 20px;
+            padding: 8px 15px;
+            gap: 10px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: var(--light-text);
+            outline: none;
+            width: 200px;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--light-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .user-action:hover {
+            color: var(--primary-orange);
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-orange);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section con Carrusel - SOLUCIÓN DEFINITIVA */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-slide img {
+            /* SOLUCIÓN: Imagen responsive que mantiene relación de aspecto */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Cambiado de 'cover' a 'contain' para ver imagen completa */
+            background-color: #1a1a1a; /* Fondo para espacios vacíos */
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+            z-index: 10;
+        }
+        
+        .slide-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--light-text);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--light-text);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+            gap: 10px;
+        }
+        
+        .carousel-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray-text);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .carousel-control.active {
+            background-color: var(--primary-orange);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .carousel-nav button {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .carousel-nav button:hover {
+            background-color: var(--primary-orange);
+        }
+        /* Productos destacados */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            background-color: #2A2A2A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .product-desc {
+            color: var(--gray-text);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            color: var(--primary-orange);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Sección de características */
+        .features {
+            background-color: var(--darker-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--light-text);
+        }
+
+        .feature-desc {
+            color: var(--gray-text);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column p {
+            color: var(--gray-text);
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: var(--gray-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li {
+                margin: 5px 10px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .carousel-content h1 {
+                font-size: 2rem;
+            }
+
+            .carousel-content p {
+                font-size: 1rem;
+            }
+            
+            .hero {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 400px;
+            }
+            
+            .carousel-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .carousel-content p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-img"> <img src="../img/logo-castle.png" class="logo-img"></div>
+                <div>
+                    <span style="color: white;">Castle</span>Gaming
+                </div>
+            </a>
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="categorias.html">Categorías</a></li>
+                    <li><a href="nosotros.html">Sobre Nosotros</a></li>
+                </ul>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar productos...">
+                </div>
+                <div class="user-actions" id="userActions">
+                    <a href="login.html" class="user-action">
+                        <i class="fas fa-user"></i>
+                        <span>Iniciar Sesión</span>
+                    </a>
+                    <a href="login.html" class="user-action">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Crear Cuenta</span>
+                    </a>
+                    <a href="carrito.html" class="user-action">
+                        <div class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">3</span>
+                        </div>
+                        <span>Carrito</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section con Carrusel -->
+    <section class="hero">
+        <div class="carousel-container">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active">
+                <img src="../img/generated-image-c1958523-f58c-4154-86fc-7e7c213d4f41.png" alt="Promoción NVIDIA">
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+                <img src="https://www.venex.com.ar/fil/banners/banner-promo-1920-2.png" alt="Promoción Especial">
+            </div>
+            
+            <!-- Slide 3 (placeholder) -->
+            <div class="carousel-slide">
+                <img src="https://via.placeholder.com/1920x500/1a1a1a/cccccc?text=CastleGaming+Ediciones+Limited" alt="CastleGaming">
+            </div>
+            
+            <!-- Slide 4 (placeholder) -->
+            <div class="carousel-slide">
+                <img src="https://via.placeholder.com/1920x500/1a1a1a/cccccc?text=Productos+Exclusivos" alt="Productos Exclusivos">
+            </div>
+            
+            <!-- Controles de navegación -->
+            <div class="carousel-nav">
+                <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <!-- Indicadores -->
+            <div class="carousel-controls">
+                <div class="carousel-control active" data-index="0"></div>
+                <div class="carousel-control" data-index="1"></div>
+                <div class="carousel-control" data-index="2"></div>
+                <div class="carousel-control" data-index="3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section class="featured-products">
+        <div class="container">
+            <h2>Productos Destacados</h2>
+            <div class="products-grid">
+                <!-- Producto 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Teclado Mecánico Edición Limitada">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Teclado Mecánico "Dragon Fire"</h3>
+                        <p class="product-desc">Edición limitada con switches Cherry MX Red y retroiluminación RGB personalizable.</p>
+                        <p class="product-price">€199,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Ratón Gaming Edición Especial">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ratón "Stealth Phantom"</h3>
+                        <p class="product-desc">Sensor de 20.000 DPI, diseño ergonómico y superficie con patrón de carbono.</p>
+                        <p class="product-price">€129,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1599669454699-248893623464?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Auriculares Gaming Limited Edition">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Auriculares "Cyber Sound X"</h3>
+                        <p class="product-desc">Sonido surround 7.1, cancelación de ruido y almohadillas de memory foam.</p>
+                        <p class="product-price">€159,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Alfombrilla de Ratón Edición Coleccionista">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Alfombrilla "Castle Realm XL"</h3>
+                        <p class="product-desc">Superficie de microtejido, base antideslizante y diseño de edición limitada.</p>
+                        <p class="product-price">€49,99</p>
+                        <a href="detalle-producto.html" class="btn">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="productos.html" class="btn btn-outline">Ver Todos los Productos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de características -->
+    <section class="features">
+        <div class="container">
+            <h2>¿Por qué Elegir CastleGaming?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Diseños Exclusivos</h3>
+                    <p class="feature-desc">Cada producto es una pieza única con diseños creados por artistas especializados.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Alto Rendimiento</h3>
+                    <p class="feature-desc">Tecnología de punta para maximizar tu rendimiento en cada partida.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Calidad Premium</h3>
+                    <p class="feature-desc">Materiales de primera calidad que garantizan durabilidad y comodidad.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏰</div>
+                    <h3 class="feature-title">Comunidad Exclusiva</h3>
+                    <p class="feature-desc">Acceso a eventos especiales y contenido único para propietarios de ediciones limitadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CastleGaming</h3>
+                    <p>Fabricantes de periféricos gaming de edición limitada para los jugadores más exigentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Productos</h3>
+                    <ul>
+                        <li><a href="productos.html">Teclados</a></li>
+                        <li><a href="productos.html">Ratones</a></li>
+                        <li><a href="productos.html">Auriculares</a></li>
+                        <li><a href="productos.html">Alfombrillas</a></li>
+                        <li><a href="productos.html">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Garantía</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Suscríbete para recibir información sobre lanzamientos exclusivos y ofertas especiales.</p>
+                    <form>
+                        <input type="email" placeholder="Tu email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 CastleGaming. Todos los derechos reservados. Ediciones Limitadas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables del carrusel
+            const slides = document.querySelectorAll('.carousel-slide');
+            const controls = document.querySelectorAll('.carousel-control');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentSlide = 0;
+            let autoSlideInterval;
+            
+            // Función para mostrar slide específica
+            function showSlide(index) {
+                // Ocultar todas las slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Desactivar todos los controles
+                controls.forEach(control => {
+                    control.classList.remove('active');
+                });
+                
+                // Mostrar slide seleccionada
+                slides[index].classList.add('active');
+                controls[index].classList.add('active');
+                
+                currentSlide = index;
+            }
+            
+            // Función para avanzar al siguiente slide
+            function nextSlide() {
+                let nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            // Función para retroceder al slide anterior
+            function prevSlide() {
+                let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            // Configurar eventos para los controles
+            controls.forEach((control, index) => {
+                control.addEventListener('click', () => {
+                    showSlide(index);
+                    resetAutoSlide();
+                });
+            });
+            
+            // Configurar eventos para botones de navegación
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+            
+            // Función para avanzar automáticamente
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    nextSlide();
+                }, 10000); // Cambiar cada 5 segundos
+            }
+            
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+            
+            // Iniciar el carrusel automático
+            startAutoSlide();
+            
+            // Pausar el carrusel al hacer hover
+            const carousel = document.querySelector('.carousel-container');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+            
+            // Asegurar que la primera slide esté visible al cargar
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

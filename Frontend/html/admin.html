@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - CastleGaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff7b00;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+            --border-color: #333;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--darker-bg);
+            padding: 20px 0;
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+        
+        .logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+        
+        .logo h1 {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            list-style: none;
+            padding: 0 10px;
+        }
+        
+        .nav-links li {
+            margin-bottom: 5px;
+        }
+        
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 5px;
+            transition: all 0.3s;
+            gap: 10px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 123, 0, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .nav-links a i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header h2 {
+            color: var(--primary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+        
+        /* Dashboard Cards */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-card i {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .stat-card h3 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card p {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e56e00;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: rgba(255, 123, 0, 0.1);
+            color: var(--primary-color);
+        }
+        
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .edit-btn {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .delete-btn {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--darker-bg);
+            color: var(--text-color);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Status badges */
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-completed {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+        }
+        
+        .status-cancelled {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Image preview */
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            display: none;
+            margin-top: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .logo-text, .sidebar .link-text {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-crown"></i>
+            <h1 class="logo-text">Admin</h1>
+        </div>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="active" data-section="dashboard">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="link-text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="products">
+                    <i class="fas fa-box"></i>
+                    <span class="link-text">Productos</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="add-product">
+                    <i class="fas fa-plus-circle"></i>
+                    <span class="link-text">Agregar Producto</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="categories">
+                    <i class="fas fa-tags"></i>
+                    <span class="link-text">Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="brands">
+                    <i class="fas fa-tag"></i>
+                    <span class="link-text">Marcas</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="suppliers">
+                    <i class="fas fa-truck"></i>
+                    <span class="link-text">Proveedores</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="users">
+                    <i class="fas fa-users"></i>
+                    <span class="link-text">Usuarios</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-section="orders">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="link-text">Pedidos</span>
+                </a>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="link-text">Volver al Sitio</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h2>Panel de Administración</h2>
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Admin+User&background=ff7b00&color=fff" alt="Admin User">
+                <span>Administrador</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <i class="fas fa-box"></i>
+                    <h3 id="total-products">0</h3>
+                    <p>Productos Totales</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tags"></i>
+                    <h3 id="total-categories">0</h3>
+                    <p>Categorías</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tag"></i>
+                    <h3 id="total-brands">0</h3>
+                    <p>Marcas Registradas</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-truck"></i>
+                    <h3 id="total-suppliers">0</h3>
+                    <p>Proveedores Activos</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3 id="total-users">0</h3>
+                    <p>Usuarios Registrados</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3 id="total-orders">0</h3>
+                    <p>Pedidos este Mes</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h3>Pedidos Recientes</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#CG-1258</td>
+                            <td>Juan Pérez</td>
+                            <td>12/05/2023</td>
+                            <td>€299,98</td>
+                            <td><span class="status-badge status-completed">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>#CG-1257</td>
+                            <td>María García</td>
+                            <td>11/05/2023</td>
+                            <td>€159,99</td>
+                            <td><span class="status-badge status-pending">Pendiente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div id="products" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Productos</h3>
+                <button class="btn" onclick="showSection('add-product')">
+                    <i class="fas fa-plus"></i> Agregar Producto
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Marca</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los productos se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add Product Section -->
+        <div id="add-product" class="content-section">
+            <div class="section-header">
+                <h3>Agregar Nuevo Producto</h3>
+            </div>
+            
+            <form id="product-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-name">Nombre del Producto *</label>
+                        <input type="text" id="product-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Categoría *</label>
+                        <select id="product-category" class="form-control" required>
+                            <option value="">Seleccionar categoría</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-brand">Marca *</label>
+                        <select id="product-brand" class="form-control" required>
+                            <option value="">Seleccionar marca</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-supplier">Proveedor *</label>
+                        <select id="product-supplier" class="form-control" required>
+                            <option value="">Seleccionar proveedor</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-price">Precio (€) *</label>
+                        <input type="number" id="product-price" class="form-control" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-stock">Stock *</label>
+                        <input type="number" id="product-stock" class="form-control" min="0" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description">Descripción *</label>
+                    <textarea id="product-description" class="form-control" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image-upload">Imagen del Producto</label>
+                    <input type="file" id="product-image-upload" class="form-control" accept="image/*">
+                    <img id="product-image-preview" class="image-preview">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="product-featured">
+                            <input type="checkbox" id="product-featured"> Producto Destacado
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-active">
+                            <input type="checkbox" id="product-active" checked> Producto Activo
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-save"></i> Guardar Producto
+                </button>
+            </form>
+        </div>
+
+        <!-- Categories Section -->
+        <div id="categories" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Categorías</h3>
+                <button class="btn" onclick="showTab('categories', 'add-category-tab')">
+                    <i class="fas fa-plus"></i> Agregar Categoría
+                </button>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="categories-list-tab">Lista de Categorías</div>
+                <div class="tab" data-tab="add-category-tab">Agregar Categoría</div>
+            </div>
+            
+            <div id="categories-list-tab" class="tab-content active">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Productos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las categorías se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="add-category-tab" class="tab-content">
+                <form id="category-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category-name">Nombre de la Categoría *</label>
+                            <input type="text" id="category-name" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category-description">Descripción</label>
+                        <textarea id="category-description" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <i class="fas fa-save"></i> Guardar Categoría
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Brands Section -->
+        <div id="brands" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Marcas</h3>
+                <button class="btn" onclick="showTab('brands', 'add-brand-tab')">
+                    <i class="fas fa-plus"></i> Agregar Marca
+                </button>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="brands-list-tab">Lista de Marcas</div>
+                <div class="tab" data-tab="add-brand-tab">Agregar Marca</div>
+            </div>
+            
+            <div id="brands-list-tab" class="tab-content active">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Productos</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las marcas se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="add-brand-tab" class="tab-content">
+                <form id="brand-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="brand-name">Nombre de la Marca *</label>
+                            <input type="text" id="brand-name" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="brand-description">Descripción</label>
+                        <textarea id="brand-description" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="brand-logo">URL del Logo</label>
+                        <input type="text" id="brand-logo" class="form-control">
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <i class="fas fa-save"></i> Guardar Marca
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Suppliers Section -->
+        <div id="suppliers" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Proveedores</h3>
+                <button class="btn" onclick="showTab('suppliers', 'add-supplier-tab')">
+                    <i class="fas fa-plus"></i> Agregar Proveedor
+                </button>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="suppliers-list-tab">Lista de Proveedores</div>
+                <div class="tab" data-tab="add-supplier-tab">Agregar Proveedor</div>
+            </div>
+            
+            <div id="suppliers-list-tab" class="tab-content active">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Productos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los proveedores se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="add-supplier-tab" class="tab-content">
+                <form id="supplier-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="supplier-name">Nombre del Proveedor *</label>
+                            <input type="text" id="supplier-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier-phone">Teléfono *</label>
+                            <input type="tel" id="supplier-phone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="supplier-dni">DNI *</label>
+                            <input type="text" id="supplier-dni" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier-email">Email</label>
+                            <input type="email" id="supplier-email" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="supplier-address">Dirección</label>
+                        <textarea id="supplier-address" class="form-control" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="supplier-active">
+                            <input type="checkbox" id="supplier-active" checked> Proveedor Activo
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn">
+                        <i class="fas fa-save"></i> Guardar Proveedor
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div id="users" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Usuarios</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Registro</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Juan Pérez</td>
+                        <td>juan@example.com</td>
+                        <td>15/03/2023</td>
+                        <td><span class="status-badge status-completed">Activo</span></td>
+                        <td class="action-buttons">
+                            <button class="action-btn edit-btn">Editar</button>
+                            <button class="action-btn delete-btn">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>María García</td>
+                        <td>maria@example.com</td>
+                        <td>22/04/2023</td>
+                        <td><span class="status-badge status-completed">Activo</span></td>
+                        <td class="action-buttons">
+                            <button class="action-btn edit-btn">Editar</button>
+                            <button class="action-btn delete-btn">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Orders Section -->
+        <div id="orders" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Pedidos</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Pedido</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Productos</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#CG-1258</td>
+                        <td>Juan Pérez</td>
+                        <td>12/05/2023</td>
+                        <td>2 productos</td>
+                        <td>€299,98</td>
+                        <td><span class="status-badge status-completed">Completado</span></td>
+                        <td class="action-buttons">
+                            <button class="action-btn edit-btn">Ver Detalles</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#CG-1257</td>
+                        <td>María García</td>
+                        <td>11/05/2023</td>
+                        <td>1 producto</td>
+                        <td>€159,99</td>
+                        <td><span class="status-badge status-pending">Pendiente</span></td>
+                        <td class="action-buttons">
+                            <button class="action-btn edit-btn">Ver Detalles</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>
