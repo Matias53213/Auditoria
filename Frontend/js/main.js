@@ -113,3 +113,154 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', function() {
         updateNavbar();
     });
+            // --- CONFIG ---
+        const API_BASE_URL = 'http://localhost:4000'; // <-- debe apuntar al host (sin "/api")
+        const PLACEHOLDER_IMG = 'https://via.placeholder.com/150x150/2A2A2A/cccccc?text=Imagen';
+
+        // Obtener productos desde la API
+        async function fetchProducts() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/productos`);
+                if (!res.ok) throw new Error('Error al obtener productos: ' + res.status);
+                const productos = await res.json();
+                console.log('Productos recibidos (imagenPrincipal):', productos.map(p => ({id: p.id, imagenPrincipal: p.imagenPrincipal})));
+                return productos;
+            } catch (err) {
+                console.error('fetchProducts error:', err);
+                return [];
+            }
+        }
+
+        // Construye la URL final de la imagen (soporta varias formas)
+        function buildImageUrl(imagenPrincipal) {
+            if (!imagenPrincipal) return null;
+            if (imagenPrincipal === 'default.jpg') return null; // tratar como sin imagen
+            // URL absoluta
+            if (/^https?:\/\//i.test(imagenPrincipal)) return imagenPrincipal;
+            // path absoluto en el servidor, ejemplo "/uploads/archivo.png" o "/api/uploads/archivo.png"
+            if (imagenPrincipal.startsWith('/')) {
+                // Si la API sirve uploads en /uploads a nivel global (recomendado)
+                return `${API_BASE_URL}${imagenPrincipal}`;
+            }
+            // solo filename -> asumimos carpeta /uploads
+            return `${API_BASE_URL}/uploads/${encodeURIComponent(imagenPrincipal)}`;
+        }
+
+        // Renderiza productos (filtra destacados aquí)
+        function renderProducts(products) {
+            const container = document.getElementById('products-container');
+            if (!products || products.length === 0) {
+                container.innerHTML = '<div class="no-products">No hay productos destacados en este momento</div>';
+                return;
+            }
+
+            // Filtramos destacados y limitamos a 4
+            const featured = products.filter(p => !!p.destacado).slice(0, 4);
+            if (featured.length === 0) {
+                container.innerHTML = '<div class="no-products">No hay productos destacados en este momento</div>';
+                return;
+            }
+
+            const cards = featured.map(product => {
+                const imagenUrlCandidate = buildImageUrl(product.imagenPrincipal);
+                // Si buildImageUrl devolvió null, usamos placeholder
+                const imagenUrl = imagenUrlCandidate || PLACEHOLDER_IMG;
+
+                // para debug: ver URL final en consola (puedes quitar luego)
+                console.log(`Producto ${product.id} -> img: ${imagenUrl}`);
+
+                const precio = (typeof product.precio === 'string') ? parseFloat(product.precio) : product.precio;
+                const precioOriginal = product.precioOriginal
+                    ? (typeof product.precioOriginal === 'string' ? parseFloat(product.precioOriginal) : product.precioOriginal)
+                    : null;
+
+                return `
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="${imagenUrl}" alt="${escapeHtml(product.nombre || 'Producto')}"
+                            onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}'">
+                            <div class="destacado-badge">Destacado</div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${escapeHtml(product.nombre || '')}</h3>
+                            <p class="product-desc">${escapeHtml(product.descripcion || 'Descripción no disponible')}</p>
+                            <div class="product-price">
+                                ${precioOriginal ? `<span class="product-price-original">€${(precioOriginal||0).toFixed(2)}</span>` : ''}
+                                €${(precio||0).toFixed(2)}
+                            </div>
+                            ${product.limiteEdicion ? `<p><small>Edición Limitada: ${product.limiteEdicion} unidades</small></p>` : ''}
+                            <a href="detalle-producto.html?id=${encodeURIComponent(product.id)}" class="btn">Ver Detalles</a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = cards;
+        }
+
+    // pequeña función para escapar HTML en textos
+    function escapeHtml(text) {
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // INIT
+    async function initPage() {
+        const productos = await fetchProducts();
+        renderProducts(productos);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initPage();
+
+        // CARRUSEL (tu código original, sin cambios funcionales)
+        const slides = document.querySelectorAll('.carousel-slide');
+        const controls = document.querySelectorAll('.carousel-control');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            controls.forEach(control => control.classList.remove('active'));
+            slides[index].classList.add('active');
+            if (controls[index]) controls[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prevIndex);
+        }
+
+        controls.forEach((control, index) => {
+            control.addEventListener('click', () => { showSlide(index); resetAutoSlide(); });
+        });
+
+        prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+        nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => nextSlide(), 10000);
+        }
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+        startAutoSlide();
+
+        const carousel = document.querySelector('.carousel-container');
+        carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        carousel.addEventListener('mouseleave', () => startAutoSlide());
+        showSlide(0);
+    });

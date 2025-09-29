@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../dbconfig/db';
-import { Pago } from '../entities/pago';
-import { Pedido } from '../entities/pedido';
+import { Pago } from '../models/pago';
+import { Pedido } from '../models/pedido';
 import { sendPaymentConfirmationEmail } from '../services/email.service';
 
 export const registerPayment = async (req: Request, res: Response): Promise<void> => {
@@ -55,7 +55,6 @@ export const registerPayment = async (req: Request, res: Response): Promise<void
                         metodo: 'MercadoPago',
                         pedido: { id: Number(orderId) },
                         usuario: { id: pedidos[0]?.usuario.id },
-                        fechaPago: status === 'approved' ? new Date() : null,
                         datosTransaccion: req.body.datosTransaccion || null
                     })
                 )

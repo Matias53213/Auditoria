@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../dbconfig/db';
-import { Pedido } from '../entities/pedido';
-import { DetallePedido } from '../entities/detallePedido';
-import { Usuario } from '../entities/usuario';
-import { Producto } from '../entities/producto';
+import { Pedido } from '../models/pedido';
+import { DetallePedido } from '../models/detallePedido';
+import { User } from '../models/usuario';
+import { Producto } from '../models/producto';
 
 // Función para generar un número de pedido único
 const generateOrderNumber = (): string => {
@@ -23,13 +23,13 @@ export const createOrder = async (req: Request, res: Response) => {
             throw new Error('El formato de productos es incorrecto');
         }
 
-        const userExists = await queryRunner.manager.count(Usuario, { where: { id: userId } });
+        const userExists = await queryRunner.manager.count(User, { where: { id: userId } });
         if (!userExists) {
             throw new Error(`El usuario con ID ${userId} no existe`);
         }
 
         // Obtener datos del usuario para las direcciones
-        const user = await queryRunner.manager.findOne(Usuario, { where: { id: userId } });
+        const user = await queryRunner.manager.findOne(User, { where: { id: userId } });
         if (!user) {
             throw new Error('Usuario no encontrado');
         }

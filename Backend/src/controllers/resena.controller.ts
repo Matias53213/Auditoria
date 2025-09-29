@@ -1,8 +1,8 @@
 // src/controllers/resenaController.ts
 import { Request, Response } from 'express';
-import { Resena } from '../entities/resena';
-import { User } from '../entities/usuario';
-import { Producto } from '../entities/producto';
+import { Resena } from '../models/resena';
+import { User } from '../models/usuario';
+import { Producto } from '../models/producto';
 
 export const getResenas = async (req: Request, res: Response) => {
   try {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from '../entities/usuario';
+import { User } from '../models/usuario';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { transporters } from '../nodemailer/mailer';

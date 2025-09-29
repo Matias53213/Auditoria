@@ -1,8 +1,8 @@
 // src/controllers/listaDeseosController.ts
 import { Request, Response } from 'express';
-import { ListaDeseos } from '../entities/listaDeseos';
-import { User } from '../entities/usuario';
-import { Producto } from '../entities/producto';
+import { ListaDeseos } from '../models/listaDeseos';
+import { User } from '../models/usuario';
+import { Producto } from '../models/producto';
 
 export const getListaDeseosByUsuario = async (req: Request, res: Response) => {
   const { usuarioId } = req.params;

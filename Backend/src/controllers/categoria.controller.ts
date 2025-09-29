@@ -1,7 +1,7 @@
 // src/controllers/categoriaController.ts
 import { Request, Response } from 'express';
-import { Categoria } from '../entities/categoria';
-import { Producto } from '../entities/producto';
+import { Categoria } from '../models/categoria';
+import { Producto } from '../models/producto';
 
 export const getCategorias = async (req: Request, res: Response) => {
   try {

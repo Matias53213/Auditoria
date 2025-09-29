@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Proveedor } from '../entities/proveedor';
-import { Producto } from '../entities/producto';
+import { Proveedor } from '../models/proveedor';
+import { Producto } from '../models/producto';
 
 export const getProveedores = async (req: Request, res: Response) => {
   try {

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { User } from "../entities/usuario";
+import { User } from "../models/usuario";
 import { AppDataSource } from "../dbconfig/db";
 
 const userRepo = AppDataSource.getRepository(User);

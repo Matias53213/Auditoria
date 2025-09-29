@@ -1,7 +1,7 @@
 // src/controllers/marcaController.ts
 import { Request, Response } from 'express';
-import { Marca } from '../entities/marca';
-import { Producto } from '../entities/producto';
+import { Marca } from '../models/marca';
+import { Producto } from '../models/producto';
 
 export const getMarcas = async (req: Request, res: Response) => {
   try {

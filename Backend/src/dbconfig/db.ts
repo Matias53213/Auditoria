@@ -1,15 +1,15 @@
 import { DataSource } from 'typeorm'
 // Nuevas entities
-import { Proveedor } from '../entities/proveedor'
-import { Marca } from '../entities/marca'
-import { Categoria } from '../entities/categoria'
-import { Producto } from '../entities/producto'
-import { User } from '../entities/usuario'
-import { Pedido } from '../entities/pedido'
-import { DetallePedido } from '../entities/detallePedido'
-import { Pago } from '../entities/pago'
-import { Resena } from '../entities/resena'
-import { ListaDeseos } from '../entities/listaDeseos'
+import { Proveedor } from '../models/proveedor'
+import { Marca } from '../models/marca'
+import { Categoria } from '../models/categoria'
+import { Producto } from '../models/producto'
+import { User } from '../models/usuario'
+import { Pedido } from '../models/pedido'
+import { DetallePedido } from '../models/detallePedido'
+import { Pago } from '../models/pago'
+import { Resena } from '../models/resena'
+import { ListaDeseos } from '../models/listaDeseos'
 
 export const AppDataSource = new DataSource({
     type: "postgres",

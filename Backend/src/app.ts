@@ -12,8 +12,8 @@ import userRoutes from "./routes/user.routes"
 import { confirmAccount } from './controllers/auth.controller';
 import path from 'path';
 import { AppDataSource } from './dbconfig/db';
-import { Marca } from './entities/marca';
-import { Resena } from './entities/resena';
+import { Marca } from './models/marca';
+import { Resena } from './models/resena';
 
 const app = express();
 

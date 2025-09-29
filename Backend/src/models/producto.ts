@@ -57,6 +57,9 @@ export class Producto extends BaseEntity {
   @Column({ default: true })
   activo: boolean;
 
+  @Column ({default: false})
+  destacado: boolean;
+
   @OneToMany(() => DetallePedido, detalle => detalle.producto)
   detallesPedido: DetallePedido[];
 

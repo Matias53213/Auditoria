@@ -1,11 +1,11 @@
 // src/controllers/productoController.ts
 import { Request, Response } from 'express';
-import { Producto } from '../entities/producto';
-import { Proveedor } from '../entities/proveedor';
-import { Marca } from '../entities/marca';
-import { Categoria } from '../entities/categoria';
-import { Resena } from '../entities/resena';
-import { ListaDeseos } from '../entities/listaDeseos';
+import { Producto } from '../models/producto';
+import { Proveedor } from '../models/proveedor';
+import { Marca } from '../models/marca';
+import { Categoria } from '../models/categoria';
+import { Resena } from '../models/resena';
+import { ListaDeseos } from '../models/listaDeseos';
 
 export const getProductos = async (req: Request, res: Response) => {
   try {
@@ -57,7 +57,8 @@ export const createProducto = async (req: Request, res: Response) => {
     numeroSerieInicio,
     caracteristicasEspeciales,
     fechaLanzamiento,
-    activo
+    activo,
+    destacado
   } = req.body;
 
   try {
@@ -102,7 +103,8 @@ export const createProducto = async (req: Request, res: Response) => {
       numeroSerieInicio,
       caracteristicasEspeciales,
       fechaLanzamiento: fechaLanzamiento ? new Date(fechaLanzamiento) : null,
-      activo: activo !== undefined ? activo : true
+      activo: activo !== undefined ? activo : true,
+      destacado: destacado !== undefined ? destacado : true
     });
 
     await nuevoProducto.save();
@@ -129,7 +131,8 @@ export const updateProducto = async (req: Request, res: Response) => {
     numeroSerieInicio,
     caracteristicasEspeciales,
     fechaLanzamiento,
-    activo
+    activo,
+    destacado
   } = req.body;
 
   try {
@@ -193,6 +196,7 @@ export const updateProducto = async (req: Request, res: Response) => {
     producto.caracteristicasEspeciales = caracteristicasEspeciales !== undefined ? caracteristicasEspeciales : producto.caracteristicasEspeciales;
     producto.fechaLanzamiento = fechaLanzamiento ? new Date(fechaLanzamiento) : producto.fechaLanzamiento;
     producto.activo = activo !== undefined ? activo : producto.activo;
+    producto.destacado = destacado !== undefined ? destacado : producto.destacado;
 
     await producto.save();
     res.json(producto);

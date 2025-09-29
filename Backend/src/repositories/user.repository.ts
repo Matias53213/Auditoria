@@ -1,6 +1,6 @@
 import { error } from "console";
 import { AppDataSource } from "../dbconfig/db";
-import { User } from "../entities/usuario";
+import { User } from "../models/usuario";
 
 const UserRepository = AppDataSource.getRepository(User).extend({
   findById: async function (id: number): Promise<User>{

@@ -34,7 +34,6 @@ export class User extends BaseEntity {
   @Column({ default: false })
   confirmacion: boolean;
 
-
   @Column({ type: 'varchar', length: 6, nullable: true })
   confirmationCode: string | null; // <-- Nuevo campo para el código
 
